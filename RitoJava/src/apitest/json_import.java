@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,10 +57,14 @@ public class json_import {
     	System.out.print("Tipo: "+o.get("playerStatSummaryType"));
     	System.out.print(", Victorias: "+o.get("wins"));
     	JSONObject o2=o.getJSONObject("aggregatedStats");
-    	if (o2.keys().hasNext()){
-    		
+    	Iterator it=o2.keys();
+    	if (it.hasNext()){
+    		while (it.hasNext()){
+    			String s=(String) it.next();
+    			System.out.print(" "+s+ " "+ o2.get(s));
+    		}
     	}
-    	System.out.print(o2.toString());
+    	//System.out.print(o2.toString());
     	System.out.println("");
     }
   }
