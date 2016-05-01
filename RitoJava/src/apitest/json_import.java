@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class json_import {
 
   private static String readAll(Reader rd) throws IOException {
@@ -36,8 +37,17 @@ public class json_import {
   }
 
   public static void main(String[] args) throws IOException, JSONException {
-    JSONObject json = readJsonFromUrl("https://graph.facebook.com/19292868552");
-    System.out.println(json.toString());
-    System.out.println(json.get("id"));
+	int id=0;
+	String nombre="restonpiston";
+	String webs="https://euw.api.pvp.net/api/lol/euw";
+	String Api="fcb02306-537c-497a-8704-b804c1e73d1e";
+    JSONObject summ = readJsonFromUrl(webs+"/v1.4/summoner/by-name/"+nombre+"?api_key="+Api);
+    System.out.println(summ.toString());
+    JSONObject yo=(JSONObject) summ.get(nombre);
+    summ=null;
+    id=(int) yo.get("id");
+    yo=null;
+    JSONObject suma=readJsonFromUrl(webs+"/v1.3/stats/by-summoner/"+id+"/summary");
+    
   }
 }
